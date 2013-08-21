@@ -10,6 +10,8 @@ namespace MultiTenant.Base
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // base route that gets matched provided none of the parameters 
+            // match any tenant names
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

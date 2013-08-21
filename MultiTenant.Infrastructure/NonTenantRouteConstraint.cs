@@ -24,7 +24,9 @@ namespace MultiTenant.Infrastructure
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values,
             RouteDirection routeDirection)
         {
-            return !TenantList.Contains(values[parameterName].ToString());
+            var param = values[parameterName].ToString();
+
+            return !TenantList.Contains(param);
         }
     }
 }
