@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -10,7 +9,6 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Extras.Multitenant;
 using Autofac.Integration.Mvc;
-using MultiTenant.Base.Controllers;
 using MultiTenant.Infrastructure;
 
 namespace MultiTenant.Base
@@ -19,7 +17,7 @@ namespace MultiTenant.Base
     // visit http://go.microsoft.com/?LinkId=9394801
     public class MvcApplication : HttpApplication
     {
-        private static List<string> _tenants; 
+        private static List<string> _tenants;
 
         public static ICollection<string> Tenants
         {
@@ -34,7 +32,7 @@ namespace MultiTenant.Base
         {
             _tenants = new List<string>();
 
-            //ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Clear();
 
             // Set up the tenant ID strategy and application container.
             // The request parameter tenant ID strategy is used here as an example.
@@ -42,7 +40,12 @@ namespace MultiTenant.Base
             var tenantIdStrategy = new RoutingParameterStrategy();
             var builder = new ContainerBuilder();
 
-            builder.RegisterControllers(typeof (MvcApplication).Assembly).Named<IController>(t=> t.Name.Replace("Controller", string.Empty)).AsSelf();
+            //builder.RegisterType<RazorViewEngine>().As<IViewEngine>();
+            builder.RegisterType<WebFormViewEngine>().As<IViewEngine>();
+
+            builder.RegisterControllers(typeof (MvcApplication).Assembly)
+                .Named<IController>(t => t.Name.Replace("Controller", string.Empty))
+                .AsSelf();
 
             // Create the multitenant container and the tenant overrides.
             var mtc = new MultitenantContainer(tenantIdStrategy, builder.Build());
@@ -63,6 +66,7 @@ namespace MultiTenant.Base
                 var assembly1 = assembly;
                 mtc.ConfigureTenant(pluginSpecification.Tenant,
                     b =>
+                    {
                         b.RegisterControllers(assembly1)
                             .Named<IController>(t => t.Name.Replace("Controller", string.Empty))
                             .As(a =>
@@ -76,7 +80,11 @@ namespace MultiTenant.Base
                                     }
 
                                     return baseType ?? a;
-                                }));
+                                });
+
+                        b.RegisterType<RazorViewEngine>().As<IViewEngine>();
+                    }
+                    );
             }
 
             // Here's the magic line: Set up the DependencyResolver using
@@ -92,8 +100,9 @@ namespace MultiTenant.Base
             AuthConfig.RegisterAuth();
 
             ControllerBuilder.Current.SetControllerFactory(new MultiTenantControllerFactory(mtc));
-            //ControllerBuilder.Current.DefaultNamespaces.Clear();
-            //ControllerBuilder.Current.DefaultNamespaces.Add(typeof (HomeController).Namespace);
+
+            //ViewEngines.Engines.Add(new MultiTenantRazorViewEngine(mtc));
+            //VirtualPathFactoryManager.RegisterVirtualPathFactory(new MultiTenantVirtualPathFactory(mtc));
         }
     }
 }

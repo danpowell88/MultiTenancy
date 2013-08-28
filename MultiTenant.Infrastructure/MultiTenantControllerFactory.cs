@@ -32,4 +32,41 @@ namespace MultiTenant.Infrastructure
             return controller;
         }
     }
+
+    //public class MultiTenantRazorViewEngine : IViewEngine
+    //{
+    //    private readonly IContainer _container;
+
+    //    private IViewEngine[] _fallbackViewEngines = {new RazorViewEngine(), new WebFormViewEngine()};
+
+    //    public MultiTenantRazorViewEngine(IContainer container)
+    //    {
+    //        _container = container;
+    //    }
+
+    //    public ViewEngineResult FindPartialView(ControllerContext controllerContext, string partialViewName, bool useCache)
+    //    {
+    //        IViewEngine engine;
+    //        if (_container.TryResolve(out engine))
+    //        {
+    //            engine.FindPartialView(controllerContext, partialViewName, useCache);
+    //        }
+    //        else
+    //        {
+    //            engine = new RazorViewEngine();
+    //        }
+    //    }
+
+    //    public ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName, bool useCache)
+    //    {
+    //        var engine = _container.Resolve<IViewEngine>();
+    //        engine.FindView(controllerContext, viewName,masterName, useCache);
+    //    }
+
+    //    public void ReleaseView(ControllerContext controllerContext, IView view)
+    //    {
+    //        var engine = _container.Resolve<IViewEngine>();
+    //        engine.ReleaseView(controllerContext, view);
+    //    }
+    //}
 }
