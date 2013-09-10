@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using MultiTenant.Infrastructure;
+using MultiTenant.Infrastructure.Mvc;
 
 namespace MultiTenant.Base
 {
@@ -15,15 +15,13 @@ namespace MultiTenant.Base
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                constraints: new  {controller = new NonTenantRouteConstraint(MvcApplication.Tenants)});
+                defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional},
+                constraints: new {controller = new NonTenantRouteConstraint(MvcApplication.Tenants)});
 
             routes.MapRoute(
                 name: "Tenant",
                 url: "{tenant}/{controller}/{action}/{id}",
-                defaults: new { tenant = "", controller = "Home", action = "Index", id = UrlParameter.Optional });
-
-            
+                defaults: new {tenant = "", controller = "Home", action = "Index", id = UrlParameter.Optional});
         }
     }
 }

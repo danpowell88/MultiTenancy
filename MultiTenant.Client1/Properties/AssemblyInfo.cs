@@ -35,4 +35,4 @@ using MultiTenant.Infrastructure;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: PluginAssembly("Client1")]
+[assembly: PluginAssembly("Client1",PluginAssemblyType.View | PluginAssemblyType.Controller)]

@@ -47,21 +47,36 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.2.0\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorGenerator.Mvc">
+      <HintPath>..\packages\RazorGenerator.Mvc.2.1.2\lib\net40\RazorGenerator.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NonTenantRouteConstraint.cs" />
-    <Compile Include="MultiTenantControllerFactory.cs" />
-    <Compile Include="RoutingParameterStrategy.cs" />
-    <Compile Include="PluginAssemblyAttribue.cs" />
+    <Compile Include="Mvc\DefaultViewPageActivator.cs" />
+    <Compile Include="Mvc\MultiTenantControllerFactory.cs" />
+    <Compile Include="Mvc\MultiTenantPrecompiledViewEngine.cs" />
+    <Compile Include="Mvc\NonTenantRouteConstraint.cs" />
+    <Compile Include="Mvc\RoutingParameterStrategy.cs" />
+    <Compile Include="PluginAssembly.cs" />
+    <Compile Include="PluginAssemblyAttribute.cs" />
+    <Compile Include="PluginAssemblyType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

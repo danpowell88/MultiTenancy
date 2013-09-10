@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Web;
 using System.Web.Routing;
 
-namespace MultiTenant.Infrastructure
+namespace MultiTenant.Infrastructure.Mvc
 {
     /// <summary>
     /// This constraint casuses a route not to be matched if the route 

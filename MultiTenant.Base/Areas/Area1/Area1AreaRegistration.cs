@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using MultiTenant.Infrastructure;
+using MultiTenant.Infrastructure.Mvc;
 
 namespace MultiTenant.Base.Areas.Area1
 {
